@@ -22,7 +22,7 @@ $("#add-train-btn").on("click", function () {
 
     var trainName = $("#train-name-input").val().trim();
     var trainDestination = $("#destination-input").val().trim();
-    var trainStart = moment($("#start-input").val().trim(), "HH:MM").format("X");
+    var trainStart = moment($("#start-input").val().trim(), "HH:mm").format("X");
     var trainFrequency = $("#frequency-input").val().trim();
 
     var newTrain = {
@@ -41,10 +41,10 @@ $("#add-train-btn").on("click", function () {
 
     alert("Successfully added Train")
 
-    $("#employee-name-input").val("")
-    $("#role-input").val("")
+    $("#train-name-input").val("")
+    $("#destination-input").val("")
     $("#start-input").val("")
-    $("#rate-input").val("")
+    $("#frequency-input").val("")
 });
 
 database.ref().on("child_added", function (childSnapshot) {
@@ -57,8 +57,8 @@ database.ref().on("child_added", function (childSnapshot) {
     var rate = childSnapshot.val().rate
     var startTime = moment.unix(start).format("MM/DD/YYYY");
     console.log(startTime);
-    var mosWorked = moment().diff(moment(start, "X"), "months");
-    var billed = mosWorked * rate;
+    // var mosWorked = moment().diff(moment(start, "X"), "months");
+    // var billed = mosWorked * rate;
 
     var newRow = $("<tr>").append(
         $("<td>").text(name),
@@ -69,5 +69,5 @@ database.ref().on("child_added", function (childSnapshot) {
         $("<td>").text("$" + billed)
     );
 
-    $("#employee-table").append(newRow);
+    $("#train-table").append(newRow);
 });
