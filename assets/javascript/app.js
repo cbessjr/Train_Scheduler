@@ -51,11 +51,11 @@ database.ref().on("child_added", function (childSnapshot) {
 
     console.log(childSnapshot);
 
-    var name = childSnapshot.val().name
-    var destination = childSnapshot.val().destination
-    var start = childSnapshot.val().start
-    var rate = childSnapshot.val().rate
-    var startTime = moment.unix(start).format("MM/DD/YYYY");
+    var name = childSnapshot.val().name;
+    var destination = childSnapshot.val().destination;
+    var start = childSnapshot.val().start;
+    var frequency = childSnapshot.val().frequency;
+    var startTime = moment.unix(start).format("HH:mm");
     console.log(startTime);
     // var mosWorked = moment().diff(moment(start, "X"), "months");
     // var billed = mosWorked * rate;
@@ -64,9 +64,9 @@ database.ref().on("child_added", function (childSnapshot) {
         $("<td>").text(name),
         $("<td>").text(destination),
         $("<td>").text(startTime),
-        $("<td>").text(mosWorked),
-        $("<td>").text("$" + rate),
-        $("<td>").text("$" + billed)
+        // $("<td>").text(mosWorked),
+        $("<td>").text("$" + frequency),
+        // $("<td>").text("$" + billed)
     );
 
     $("#train-table").append(newRow);
